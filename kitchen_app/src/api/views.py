@@ -1,6 +1,6 @@
 from django.core import serializers
 from django.http import HttpResponse
-from 
+
 def index(request):
     return HttpResponse("Main API page")
 
@@ -14,3 +14,20 @@ def cancel_request(request):
 
 
 def ack_request(request):
+	pass
+
+
+def fulfill_request(request):
+	pass
+
+
+def current_requests(request):
+	pass
+
+
+def available_items(request):
+	pass
+
+
+def clear_database(request):
+	pass

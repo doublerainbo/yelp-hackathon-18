@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from kitchen_app.api import views
+from kitchen_app.src.api import views
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^fulfill_request$', views.fulfill_request, name='fulfill_request'),
     url(r'^current_requests$', views.current_requests, name='current_requests'),
     url(r'^available_items$', views.available_items, name='available_items'),
-    url(r'^clear_database$', views.available_items, name='clear_database'),
+    url(r'^clear_database$', views.clear_database, name='clear_database'),
 )
