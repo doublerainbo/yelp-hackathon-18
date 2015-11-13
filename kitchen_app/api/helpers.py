@@ -57,6 +57,12 @@ def create_serialized_response(to_serialize):
 	return HttpResponse(output)
 
 def populate_database():
+	# clear out the db before starting
+	ItemRequest.objects.all().delete()
+	ItemLocation.objects.all().delete()
+	Item.objects.all().delete()
+	Employee.objects.all().delete()
+
 	users = [('Zhao', 'Bo', 'bozhao'),
 			('Pino', 'Daniel', 'dapino'),
 			('Choudhari', 'Ajay', 'ajayc'),

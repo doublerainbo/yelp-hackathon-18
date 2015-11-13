@@ -111,12 +111,18 @@ def kitchen_requests(request):
 	if request.method == 'POST':
 		# find the snacks on the floor
 		floor = int(request.POST['floor'])
-		# items = ItemLocation.objects.filter(floor=floor)
-		# item_list = []
-		# for item in items:
-		# 	item_list.append(item.item.id)
 		requests = ItemRequest.objects.filter(item__floor=floor)
-		return create_serialized_response(requests)
+		return_value = []
+		for req in requests:
+			requester = req.requester
+			req_dict = {}
+			req_dict['requester'] = requester.username
+			req_dict['status'] = req.status
+			req_dict['item'] = req.item.item.name
+			req_dict['employee_location'] = req.employee_location
+			req_dict['request_time'] = str(req.request_time)
+			return_value.append(req_dict)
+		return HttpResponse(json.dumps(return_value))
 	return HttpResponseNotAllowed(['POST'])
 
 
