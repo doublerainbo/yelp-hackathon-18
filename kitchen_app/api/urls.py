@@ -12,4 +12,7 @@ urlpatterns = patterns('',
     url(r'^available_items$', views.available_items, name='available_items'),
     url(r'^clear_database$', views.clear_database, name='clear_database'),
     url(r'^kitchen_requests$', views.kitchen_requests, name='kitchen_requests'),
+    url(r'^add_item', views.add_item, name='add_item'),
+    url(r'^remove_item', views.remove_item, name='remove_item'),
+    url(r'^bulk_edit', views.bulk_edit, name='bulk_edit')
 )
