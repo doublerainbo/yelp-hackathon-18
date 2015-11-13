@@ -1,15 +1,19 @@
 
 from kitchen_app.models import Request as ItemRequest
+from kitchen_app.models import ItemLocation
 
 def find_user_location(user):
 	return "????"
 
 
 def create_item(username, datetime, item_id, employee_location):
+	item = ItemLocation.objects.filter(id=item_id)
+	if not item:
+		return None
 	return ItemRequest(
 		requester=username,
 		request_time=datetime,
-		item=item_id,
+		item=item,
 		employee_location=employee_location,
 		status=0)
 

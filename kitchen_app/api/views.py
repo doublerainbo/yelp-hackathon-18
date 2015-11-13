@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core import serializers
 from django.http import HttpResponse
 from django.http import HttpResponseNotAllowed
+from django.views.decorators.csrf import csrf_exempt
 
 from kitchen_app.models.item import Item
 from kitchen_app.models.request import Request as ItemRequest
@@ -13,8 +14,8 @@ from kitchen_app.api.helpers import create_item
 from kitchen_app.api.helpers import delete_item
 
 
-ok_resp = json.dumps({'ok' : 'ok'})
-bad_resp = json.dumps({'ok' : 'no'})
+ok_resp = HttpResponse(json.dumps({'ok' : 'ok'}))
+bad_resp = HttpResponse(json.dumps({'ok' : 'no'}))
 
 YELP_LOVE_URL = 'https://yelplove.appspot.com/'
 
@@ -23,6 +24,7 @@ def index(request):
     return HttpResponse("Main API page")
 
 
+@csrf_exempt
 def create_request(request):
 	'''
 	add a new item request to the Request table
@@ -40,14 +42,17 @@ def create_request(request):
 		new_item = create_item(
 			user,
 			str(datetime.now()),
-			request.POST['item_id'],
+			int(request.POST['item_id']),
 			user_location)
+		if new_item is None:
+			return bad_resp
 		# store it into the database
 		new_item.save()
 		return ok_resp
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def cancel_request(request):
 	if request.method == 'POST':
 		request_id = request.POST['request_id']
@@ -57,6 +62,7 @@ def cancel_request(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def ack_request(request):
 	if request.method == 'POST':
 		request_id = request.POST['request_id']
@@ -68,6 +74,7 @@ def ack_request(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def fulfill_request(request):
 	if request.method == 'POST':
 		request_id = request.POST['request_id']
@@ -81,6 +88,7 @@ def fulfill_request(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def current_requests(request):
 	if request.method == 'POST':
 		name = request.POST['name']
@@ -89,6 +97,7 @@ def current_requests(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def kitchen_requests(request):
 	if request.method == 'POST':
 		# find the snacks on the floor
@@ -99,6 +108,7 @@ def kitchen_requests(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def available_items(request):
 	if request.method == 'POST':
 		floor = request.POST['floor']
@@ -107,6 +117,7 @@ def available_items(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def clear_database(request):
 	if request.method == 'POST':
 		ItemRequest.objects.all().delete()
@@ -114,6 +125,7 @@ def clear_database(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def add_item(request):
 	if request.method == 'POST':
 		floor = request.POST['floor']
@@ -129,6 +141,7 @@ def add_item(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def delete_item(request):
 	if request.method == 'POST':
 		floor = request.POST['floor']
@@ -144,14 +157,15 @@ def delete_item(request):
 	return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def bulk_edit(request):
 	if request.method == 'POST':
 		floor = request.POST['floor']
 		available_items = request.POST['available_items']
 		# find the diffs
 		# first delete all that isn't in this new set
-		to_delete = ItemLocation.objects
-			.filter(floor=floor)
+		to_delete = ItemLocation.objects \
+			.filter(floor=floor) \
 			.exclude(item__in=available_items)
 		to_delete.delete()
 		# now find out which isn't in there
