@@ -4,9 +4,9 @@ import json
 from django.core import serializers
 from django.http import HttpResponse
 
-from kitchen_app.src.models import Item
-from kitchen_app.src.models import Request as ItemRequest
-from kitchen_app.src.api.helpers import find_user_location
+from kitchen_app.models import Item
+from kitchen_app.models import Request as ItemRequest
+from kitchen_app.api.helpers import find_user_location
 
 
 ok_resp = json.dumps({'ok' : 'ok'})
