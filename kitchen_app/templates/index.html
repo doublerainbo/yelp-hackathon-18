@@ -32,10 +32,7 @@
                     </select>
                 </div>
                 <div class="input-container">
-                    <select class="order-floor center" form="request_form" name="item_id">
-                        {% for item in items %}
-                            <option value="{{item.0}}">{{item.1}}</option>
-                        {% endfor %}
+                    <select class="order-item center" form="request_form" name="item_id">
                     </select>
                 </div>
                 <div class="input-container">
@@ -44,8 +41,17 @@
             </form>
         </div>
         <div class="floor">
-            <div class="current-floor">Current Requests</div>
+            <div class="current-floor">13th<span> floor</span></div>
+            <button class="choose-floor-button">Choose Floor</button>
             <img class="grid-toggle" src="{% static "images/grid.png" %}">
+        </div>
+        <div class="choose-floor center">
+            <select class="order-floor center">
+                <option>Select a floor</option>
+                        {% for i in floor_options %}
+                            <option>{{i}}</option>
+                        {% endfor %}
+            </select>
         </div>
         <div class="all-orders">
             <div class="order-container">
