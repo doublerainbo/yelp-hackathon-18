@@ -18,11 +18,14 @@
             <form id="request_form" action="{% url 'api:create_request' %}" method="post">
                 {% csrf_token %}
                 <div class="input-container">
-                    <input name="name" class="order-name center" type="text" placeholder="John Doe">
+                    <input name="name" class="order-name center" type="text" placeholder="Enter username here">
+                </div>
+                <div class="input-container">
+                    <input name="user_location" class="order-name center" type="text" placeholder="Where are you located?">
                 </div>
                 <div class="input-container">
                     <select class="order-floor center">
-                        <option>Select a floor</option>
+                        <option>Select a floor where your snack is located</option>
                         {% for i in floor_options %}
                             <option>{{i}}</option>
                         {% endfor %}
@@ -41,7 +44,7 @@
             </form>
         </div>
         <div class="floor">
-            <div class="current-floor">13th<span> floor</span></div>
+            <div class="current-floor">Current Requests</div>
             <img class="grid-toggle" src="{% static "images/grid.png" %}">
         </div>
         <div class="all-orders">
