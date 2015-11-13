@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^current_requests$', views.current_requests, name='current_requests'),
     url(r'^available_items$', views.available_items, name='available_items'),
     url(r'^clear_database$', views.clear_database, name='clear_database'),
+    url(r'^kitchen_requests$', views.kitchen_requests, name='kitchen_requests'),
 )
