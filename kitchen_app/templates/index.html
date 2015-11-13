@@ -15,7 +15,7 @@
             <img class="logo center" src="{% static "images/logo.png" %}">
         </div>
         <div class="header-extension">
-            <form action="{% url 'api:create_request' %}" method="post">
+            <form id="request_form" action="{% url 'api:create_request' %}" method="post">
                 {% csrf_token %}
                 <div class="input-container">
                     <input name="name" class="order-name center" type="text" placeholder="John Doe">
@@ -29,10 +29,11 @@
                     </select>
                 </div>
                 <div class="input-container">
-                    <select class="order-floor center">
-                    {% for item_name in items %}
-                        <option>{{item_name}}</option>
-                    {% endfor %}
+                    <select class="order-floor center" form="request_form" name="item_id">
+                        {% for item in items %}
+                            <option value="{{item.0}}">{{item.1}}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="input-container">
                     <input class="order-submit center" type="submit" value="Submit Order"/>
