@@ -42,11 +42,11 @@
         </div>
         <div class="floor">
             <div class="current-floor">13th<span> floor</span></div>
-            <button class="choose-floor-button">Choose Floor</button>
+            <button class="choose-floor-button">Choose floor</button>
             <img class="grid-toggle" src="{% static "images/grid.png" %}">
         </div>
         <div class="choose-floor center">
-            <select class="order-floor center">
+            <select class="requests-floor center">
                 <option>Select a floor</option>
                         {% for i in floor_options %}
                             <option>{{i}}</option>

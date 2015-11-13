@@ -17,7 +17,7 @@ body {
     width: 72px;
 }
 
-.logo, .order-food, .order-name, .order-submit, .order-floor, .order-item {
+.logo, .order-food, .order-name, .order-submit, .order-floor, .order-item, .requests-floor {
     display:block;
     border:none;
     outline: none;
@@ -75,7 +75,30 @@ input, select {
 
 .new-order:active {
     box-shadow: none;
+    
 }
+
+.new-order.rotate {
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;    
+/* Safari */
+-webkit-transform: rotate(-45deg);
+
+/* Firefox */
+-moz-transform: rotate(-45deg);
+
+/* IE */
+-ms-transform: rotate(-45deg);
+
+/* Opera */
+-o-transform: rotate(-45deg);
+    
+    transform: rotate(-45deg);
+
+}
+
 
 .floor {
     height: 80px;
@@ -167,6 +190,7 @@ input, select {
 .choose-floor {
     background-color: #FFB88D;
     padding-bottom: 30px;
+    display:none;
 }
 
 .choose-floor-button {
