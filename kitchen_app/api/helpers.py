@@ -1,11 +1,24 @@
 import json
+import subprocess
+import re
 from django.core import serializers
 from django.http import HttpResponse
 from kitchen_app.models import Request as ItemRequest
 from kitchen_app.models import ItemLocation
 from kitchen_app.models import Employee
 
+desk_regex = re.compile(r'Desk: \d+\-\d+')
+
 def find_user_location(user):
+	# use finger to locate user
+	cmd = ['finger', user]
+	proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	output = proc.communicate()[0]  # grab only the stdout
+	# run a regex on it, if it says Desk: ##-### then its a desk, if it doesn't
+	# then their seat is undocumented
+	result = desk_regex.findall(output)
+	if len(result) > 0:
+		return result[0]
 	return "????"
 
 
