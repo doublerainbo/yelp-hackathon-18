@@ -21,6 +21,6 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include(api_urls)),
+    url(r'^api/', include(api_urls, namespace='api')),
     url(r'^', include(web_ui_urls))
 ]
