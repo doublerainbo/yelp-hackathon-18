@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
 from django.db import models
+
+
+from employee import Employee
 from item import Item
 
+
 class Request(models.Model):
-    requester = models.CharField(max_length=64)
+    requester = models.ForeignKey(Employee)
     request_time = models.DateTimeField(auto_now_add=True)
     item = models.ForeignKey(Item)
     status = models.PositiveSmallIntegerField(default=0)
