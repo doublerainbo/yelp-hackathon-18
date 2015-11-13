@@ -1,16 +1,18 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,900,300' rel='stylesheet' type='text/css'>
-        <link type="text/css" rel="stylesheet" href="css/style.css">
+        <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}">
         <title>FeedMe</title>
     </head>
     <body>
         <!-- Fixed navbar -->
         <div class="header">
-            <img class="logo center" src="images/logo.png">
+            <img class="logo center" src="{% static "images/logo.png" %}">
         </div>
         <div class="header-extension">
             <div class="input-container">
@@ -19,19 +21,9 @@
             <div class="input-container">
                 <select class="order-floor center">
                     <option>Select a floor</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
+                    {% for i in floor_options %}
+                        <option>{{i}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="input-container">
@@ -43,7 +35,7 @@
         </div>
         <div class="floor">
             <div class="current-floor">13th<span> floor</span></div>
-            <img class="grid-toggle" src="images/grid.png">
+            <img class="grid-toggle" src="{% static "images/grid.png" %}">
         </div>
         <div class="all-orders">
             <div class="order-container">
@@ -51,49 +43,7 @@
                     <div class="what">Burrito</div>
                     <div class="who">dapino - 13th floor</div>
                 </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
-            </div>
-            <div class="order-container">
-                <div class="order-details">
-                    <div class="what">Burrito</div>
-                    <div class="who">dapino - 13th floor</div>
-                </div>
-                <img class="complete-icon" src="images/check.png">
+                <img class="complete-icon" src="{% static "images/check.png" %}">
             </div>
             <div class="order-container">
                 <div class="order-details">
@@ -115,6 +65,6 @@
         <!-- JavaScript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
+        <script type="text/javascript" src="{% static "js/scripts.js" %}"></script>
     </body>
 </html>
