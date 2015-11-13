@@ -5,7 +5,7 @@ from django.db import models
 class Employee(models.Model):
     last_name = models.CharField(max_length=32)
     first_name = models.CharField(max_length=32)
-    username = models.CharField(max_length=32)
+    username = models.CharField(max_length=32, unique=True)
 
     @property
     def full_name(self):
