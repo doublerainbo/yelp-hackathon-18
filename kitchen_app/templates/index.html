@@ -29,7 +29,10 @@
                     </select>
                 </div>
                 <div class="input-container">
-                    <input class="order-food center" type="text" placeholder="What would you like?">
+                    <select class="order-floor center">
+                    {% for item_name in items %}
+                        <option>{{item_name}}</option>
+                    {% endfor %}
                 </div>
                 <div class="input-container">
                     <input class="order-submit center" type="submit" value="Submit Order"/>
