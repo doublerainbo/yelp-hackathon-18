@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('src', '0001_initial'),
+        ('kitchen_app', '0001_initial'),
     ]
 
     operations = [

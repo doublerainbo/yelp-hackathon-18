@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('request_time', models.DateTimeField(auto_now_add=True)),
                 ('floor', models.PositiveIntegerField(default=11, db_index=True)),
                 ('status', models.PositiveSmallIntegerField(default=0)),
-                ('item', models.ForeignKey(to='src.Item')),
+                ('item', models.ForeignKey(to='kitchen_app.Item')),
             ],
             options={
                 'db_table': 'request',
