@@ -16,7 +16,12 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from kitchen_app.src.api import urls as api_urls
+from kitchen_app.src.web_ui import urls as web_ui_urls
+admin.autodiscover()
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('src.urls'))
+    url(r'^api/', include(api_urls)),
+    url(r'^', include(web_ui_urls))
 ]
