@@ -4,7 +4,9 @@ from datetime import datetime
 from django.core import serializers
 from django.http import HttpResponse
 from django.http import HttpResponseNotAllowed
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
+
 
 from kitchen_app.models import Item
 from kitchen_app.models import Request as ItemRequest
@@ -51,7 +53,7 @@ def create_request(request):
 			return bad_resp
 		# store it into the database
 		new_item.save()
-		return ok_resp
+        return redirect('kitchen_app.web_ui.views.index')
 	return HttpResponseNotAllowed(['POST'])
 
 
