@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^kitchen_requests$', views.kitchen_requests, name='kitchen_requests'),
     url(r'^add_item', views.add_item, name='add_item'),
     url(r'^remove_item', views.remove_item, name='remove_item'),
-    url(r'^bulk_edit', views.bulk_edit, name='bulk_edit')
+    url(r'^bulk_edit', views.bulk_edit, name='bulk_edit'),
+    url(r'^populate_db', views.populate_db, name='populate_db'),
 )

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from kitchen_app.models import Request as ItemRequest
 from kitchen_app.models import ItemLocation
 from kitchen_app.models import Employee
-
+from kitchen_app.models import Item
 desk_regex = re.compile(r'Desk: \d+\-\d+')
 
 def find_user_location(user):
@@ -55,3 +55,44 @@ def create_serialized_response(to_serialize):
 	actual_data = [d['fields'] for d in python_serialized]
 	output = json.dumps(actual_data)
 	return HttpResponse(output)
+
+def populate_database():
+	users = [('Zhao', 'Bo', 'bozhao'),
+			('Pino', 'Daniel', 'dapino'),
+			('Choudhari', 'Ajay', 'ajayc'),
+			('Chan', 'Desmond', 'deschan'),
+			]
+
+	for user in users:
+		e = Employee(last_name=user[0], first_name=user[1], username=user[2])
+		e.save()
+
+	snacks = ['Oatmeal', 
+				'Other Oatmeal', 
+				'Waffles',
+				'Welchs',
+				'Jerky',
+				'Corn',
+				'Larabars',
+				'Coconut Water',
+				'Ito En green tea']
+
+	for snack in snacks:
+		s = Item(name=snack)
+		s.save()
+
+	all_items = Item.objects.all()
+
+	for x in xrange(2, 14):
+		for item in all_items:
+			i_loc = ItemLocation(floor=x, item=item)
+			i_loc.save()
+
+
+	Item(name="Sun Chips").save()
+	Item(name="Mocha").save()
+	# add some unique ones on 8
+	i_loc = ItemLocation(floor=8, item=Item.objects.get(name="Sun Chips"))
+	i_loc.save()
+	i_loc = ItemLocation(floor=8, item=Item.objects.get(name="Mocha"))
+	i_loc.save()

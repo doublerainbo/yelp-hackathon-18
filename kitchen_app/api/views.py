@@ -14,6 +14,7 @@ from kitchen_app.api.helpers import find_user_location
 from kitchen_app.api.helpers import create_item
 from kitchen_app.api.helpers import delete_item
 from kitchen_app.api.helpers import create_serialized_response
+from kitchen_app.api.helpers import populate_database
 
 
 ok_resp = HttpResponse(json.dumps({'ok' : 'ok'}))
@@ -38,7 +39,7 @@ def create_request(request):
 			user_location = request.POST['user_location']
 		else:
 			# no location specified, find out where the user sits
-			user_location = find_user_location(user)
+			user_location = find_user_location(username)
 		# create the new item	
 		
 		new_item = create_item(
@@ -194,3 +195,8 @@ def bulk_edit(request):
 		return ok_resp
 		
 	return HttpResponseNotAllowed(['POST'])
+
+@csrf_exempt
+def populate_db(request):
+	populate_database()
+	return ok_resp
