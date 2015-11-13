@@ -10,6 +10,6 @@ def index(request):
     context = {
         'floor_options': range(2,15),
         'items': [(item.id, item.name) for item in Item.objects.all()],
-        'active_requests': [(r.id, r.item.item.name, r.requester.full_name, r.employee_location) for r in Request.objects.filter(status=0)],
+        'active_requests': Request.objects.filter(status=0).order_by('-request_time'),
     }
     return render(request, 'index.html', context)
