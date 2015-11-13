@@ -125,7 +125,14 @@ def available_items(request):
 	if request.method == 'POST':
 		floor = request.POST['floor']
 		items = ItemLocation.objects.filter(floor=floor)
-		return create_serialized_response(items)
+		return_value = []
+		for item in items:
+			snack_info = item.item
+			item_dict = {}
+			item_dict['id'] = item.id
+			item_dict['name'] = snack_info.name
+			return_value.append(item_dict)
+		return HttpResponse(json.dumps(return_value))
 	return HttpResponseNotAllowed(['POST'])
 
 
