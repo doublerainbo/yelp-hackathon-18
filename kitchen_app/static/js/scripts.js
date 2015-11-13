@@ -62,6 +62,14 @@ var feedMe = function () {
         $(".requests-floor").change(function () {
             var floor = $(this).find("option:selected").text();
             
+            if (floor == 2) {
+                self('.current-floor').text(floor + 'nd floor');
+            } else if (floor == 3) {
+                self('.current-floor').text(floor + 'rd floor');
+            } else if (floor >= 4) {
+                self('.current-floor').text(floor + 'th floor');
+            }
+            
             console.log(floor);
             
             self.post("http://127.0.0.1:8000/api/kitchen_requests", { floor: floor })
