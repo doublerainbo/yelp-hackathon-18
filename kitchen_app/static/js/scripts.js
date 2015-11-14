@@ -24,6 +24,10 @@ var feedMe = function () {
             }
         });
         
+        $(".order-container").click(function () {
+            $(this).find('.complete-icon').attr("src", "static/images/checked.png");
+        });
+        
         $(".grid-toggle").click(function () {
             $('.order-container').toggleClass('grid');
             $('.header').slideToggle(300);
@@ -74,12 +78,23 @@ var feedMe = function () {
             
             self.post("http://127.0.0.1:8000/api/kitchen_requests", { floor: floor })
                 .done(function (data) {
+                    if (self('.choose-floor').is(':visible')) {
+                        self('.choose-floor').slideToggle();
+                        
+                    }
+                    
+                    if ($(".choose-floor-button").text() === "Choose floor") {
+                        $(".choose-floor-button").text("Close");
+                    } else {
+                        $(".choose-floor-button").text("Choose floor");
+                    }
+                
                     console.log("Data Loaded: " + data);
                 
                     var jsonData = JSON.parse(data);
                     
                     self('.all-orders').html('');
-
+                
                     self.each(jsonData, function (i, item) {
                         
                         $('.all-orders').append('<div class="order-container"><div class="order-details"><div class="what">' +
